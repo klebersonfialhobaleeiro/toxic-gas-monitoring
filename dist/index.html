@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendendo sass</title>
+
+    <!-- <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon"> -->
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="src/index.js" defer></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" 
+    rel="stylesheet">
+</head>
+<body data-theme="">
+    <div class="container main-container">
+
+        
+
+        <aside class="main-aside">
+            <div class="top">
+                <div class="logo">
+                    <img src="assets/images/logo.png" alt="person photo" class="">
+                    <h2>NI<span class="primary">PHY</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="#" class="sidebar__item active">
+                    <span class="material-icons-sharp sidebar__item__icon"> grid_view </span>
+                    <h3 class="sidebar__item__label">Dashboard</h3>
+                </a>
+                <a href="#" class="sidebar__item">
+                    <span class="material-icons-sharp sidebar__item__icon"> people </span>
+                    <h3 class="sidebar__item__label">Users</h3>
+                </a>
+                <a href="#" class="sidebar__item">
+                    <span class="material-icons-sharp sidebar__item__icon"> auto_graph </span>
+                    <h3 class="sidebar__item__label">Analytics</h3>
+                </a>
+                <a href="#" class="sidebar__item">
+                    <span class="material-icons-sharp sidebar__item__icon"> mail </span>
+                    <h3 class="sidebar__item__label">Messages <span class="message-count">26</span></h3>
+                    
+                </a>
+                <a href="#" class="sidebar__item">
+                    <span class="material-icons-sharp sidebar__item__icon"> settings </span>
+                    <h3 class="sidebar__item__label">Settings</h3>
+                </a>
+                <a href="#" class="sidebar__item">
+                    <span class="material-icons-sharp sidebar__item__icon"> logout </span>
+                    <h3 class="sidebar__item__label">Logout</h3>
+                </a>
+            </div>
+
+        </aside>
+
+        <!-- End of sidebar -->
+
+        <main class="content">
+            <div class="navbar">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">  menu </span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active" id="light-btn">  light_mode </span>
+                    <span class="material-icons-sharp" id="dark-btn">  dark_mode </span>
+                </div>
+    
+                <div class="profile">
+                    <div class="profile__info">
+                        <p>Hey, <b>Jader</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-foto">
+                        <img src="assets/images/profile-photo.jpg" alt="" class="profile__photo">
+                    </div>
+                </div>
+            </div>
+            
+            <h1>Dashboard</h1>
+
+            
+            <div class="date">
+                <input type="date" name="search-date" id="search-date">
+            </div>
+
+            <div class="insights-container">
+
+                <div class="insight">
+                    <div class="insight__header">
+                        <span class="material-icons-sharp insight__header__icon bg-primary"> analytics </span>
+                        <h3 class="insight__header__title">Authentication</h3>
+                    </div>
+                    <div class="insight__content">
+                        <span class="insight__content__data">200</span>
+                        <footer class="text-muted">Last 30 days</footer>
+                    </div>
+                    <canvas id="myChart" class="insight__graph"></canvas>
+                </div>
+
+                <div class="insight">
+                    <div class="insight__header">
+                        <span class="material-icons-sharp insight__header__icon bg-warning"> analytics </span>
+                        <h3 class="insight__header__title">Authentication</h3>
+                    </div>
+                    <div class="insight__content">
+                        <span class="insight__content__data">200</span>
+                        <footer class="text-muted">Last 30 days</footer>
+                    </div>
+                    <canvas id="myChart2" class="insight__graph"></canvas>
+                </div>
+
+                <div class="insight">
+                    <div class="insight__header">
+                        <span class="material-icons-sharp insight__header__icon bg-danger"> analytics </span>
+                        <h3 class="insight__header__title">Authentication</h3>
+                    </div>
+                    <div class="insight__content">
+                        <span class="insight__content__data">200</span>
+                        <footer class="text-muted">Last 30 days</footer>
+                    </div>
+                    <canvas id="myChart3" class="insight__graph"></canvas>
+            
+                </div>
+            </div>
+
+            <div class="requests">
+                <h2>Authentication Requests</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Phone number</th>
+                            <th>User type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Name">Jader Adriel</td>
+                            <td data-label="Code">446455514</td>
+                            <td data-label="Phone number">+55997748454</td>
+                            <td data-label="Type">Admin</td>
+                            <td>
+                                <div class="actions">
+                                    <a href="" class="sucess action">
+                                        <span class="material-icons-sharp icon">done</span> <span class="action__label">Aprove</span>
+                                    </a>
+                                    <a href="" class="danger action">
+                                        <span class="material-icons-sharp icon">close</span> 
+                                        <span class="action__label">Decline</span>
+                                    </a>
+                                    <a href="" class="text-muted action ">
+                                        <span class="material-icons-sharp icon">open_in_new</span>
+                                        <span class="action__label">Detail</span>
+                                    </a>
+                                </div>
+                            </td>
+                            
+                        </tr>
+
+                        <tr>
+                            <td data-label="Name">Jader Adriel</td>
+                            <td data-label="Code">446455514</td>
+                            <td data-label="Phone number">+55997748454</td>
+                            <td data-label="Type">Admin</td>
+                            <td>
+                                <div class="actions">
+                                    <a href="" class="sucess action">
+                                        <span class="material-icons-sharp icon">done</span> <span class="action__label">Aprove</span>
+                                    </a>
+                                    <a href="" class="danger action">
+                                        <span class="material-icons-sharp icon">close</span> 
+                                        <span class="action__label">Decline</span>
+                                    </a>
+                                    <a href="" class="text-muted action ">
+                                        <span class="material-icons-sharp icon">open_in_new</span>
+                                        <span class="action__label">Detail</span>
+                                    </a>
+                                </div>
+                            </td>
+                            
+                        </tr>
+
+                        <tr>
+                            <td data-label="Name">Jader Adriel</td>
+                            <td data-label="Code">446455514</td>
+                            <td data-label="Phone number">+55997748454</td>
+                            <td data-label="Type">Admin</td>
+                            <td>
+                                <div class="actions">
+                                    <a href="" class="sucess action">
+                                        <span class="material-icons-sharp icon">done</span> <span class="action__label">Aprove</span>
+                                    </a>
+                                    <a href="" class="danger action">
+                                        <span class="material-icons-sharp icon">close</span> 
+                                        <span class="action__label">Decline</span>
+                                    </a>
+                                    <a href="" class="text-muted action ">
+                                        <span class="material-icons-sharp icon">open_in_new</span>
+                                        <span class="action__label">Detail</span>
+                                    </a>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#" class="text-muted">Show all</a>
+            </div>
+        </main>
+
+        <!-- End of content -->
+        
+
+    </div>
+</body>
+</html>
