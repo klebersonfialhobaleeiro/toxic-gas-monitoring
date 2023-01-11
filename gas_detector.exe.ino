@@ -1,51 +1,66 @@
-// incluindo bibliotecas 
+// incluindo bibliotecas:
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <Firebase_ESP_Client.h>
+#include <NTPClient.h>
+#include <WiFiUdp.h>
 
-//Definindo portas de ledes 
-#define led1 4
-#define led2 5
-#define led3 2
+//Definindo portas de ledes:
+#define led1 12
+#define led2 14
+#define led3 16
 #define led4 16
 
-// Insert your network credentials
-#define WIFI_SSID "REDE ABERTA "
-#define WIFI_PASSWORD "melemalu"
+// Insira suas credenciais de rede:
+#define WIFI_SSID "************" // Nome da rede WiFi.
+#define WIFI_PASSWORD "********" // Senha da rede WiFi.
 
-//Dados do FireBase
-#define API_KEY "AIzaSyAeW-oRdds8R8GpJ08isjYwxD24yH9h8-I"
-#define DATABASE_URL "https://sensor-mqs-default-rtdb.firebaseio.com/" 
+//Dados do FireBase:
+#define API_KEY "****************"
+#define DATABASE_URL "******************************"
 
-//Define Firebase Data object
+//Definir cliente NTP para obter tempo:
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "pool.ntp.org");
+
+//Week Days:
+String weekDays[7]={"Domingo", "Segunda", "Terça", "Quarta", "Thursday", "Friday", "Saturday"};
+
+//Month names:
+String months[12]={"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+
+//Definindo objetos do Firebase:
 FirebaseData fbdo;
 FirebaseAuth auth;
 FirebaseConfig config;
 
-
-// Declarando Variavesis 
+// Declarando Variavesis:
 bool signupOK = false;
-int mq2sensor=A0;
+int mq2sensor=2;
 int mq8sensor=12;
 int mq9sensor=13;
 int sensorvalueMQ2;
-int sensorvalueMQ3;
+int sensorvalueMQ8;
 int sensorvalueMQ9;
-
+String DateHora;
 
 void setup(){
-  Serial.begin(115200); // monitor serial 
+  Serial.begin(115200); // Monitor serial.
 
-  pinMode(led1, OUTPUT); 
-  pinMode(led2, OUTPUT); 
-  pinMode(led3, OUTPUT); 
-  pinMode(led4, OUTPUT); 
+// Declarando como pinos de saida:
+  pinMode(led1, OUTPUT); //Led
+  pinMode(led2, OUTPUT); //Led
+  pinMode(led3, OUTPUT); //Led
+  pinMode(led4, OUTPUT); //Led
+  pinMode(mq2sensor, OUTPUT); //MQ2 sensor.
+  pinMode(mq8sensor, OUTPUT); //MQ8 sensor.
+  pinMode(mq9sensor, OUTPUT); //MQ9 sensor.
 
-  pinMode(mq2sensor, INPUT);//MQ2 sensor 
-  pinMode(mq8sensor, INPUT);//MQ8 sensor 
-  pinMode(mq9sensor, INPUT);//MQ9 sensor 
+  digitalWrite(mq2sensor, LOW); 
+  digitalWrite(mq8sensor, LOW); 
+  digitalWrite(mq9sensor, LOW); 
 
-//Conectar WiFi
+  //Conecta ao WiFi:
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Connecting to Wi-Fi");
   while (WiFi.status() != WL_CONNECTED){
@@ -60,24 +75,86 @@ void setup(){
   config.api_key = API_KEY;
   config.database_url = DATABASE_URL;
 
-  /* Sign up */
+  /*Teste de coneção ao fire base */
   if (Firebase.signUp(&config, &auth, "", "")){
     Serial.println("ok");
     signupOK = true;
   }
   else{
-    Serial.printf("%s\n", config.signer.signupError.message.c_str());
+    Serial.printf("%s\n", config.signer.signupError.message.c_str()); // Mensagem de erro de coneção ao Firebase.
   }
   
-  //conectando ao FireBase
+// Inicialize um NTPClient para obter tempo:
+  timeClient.begin();
+  // Set offset time in seconds to adjust for your timezone, for example:
+  // GMT +1 = 3600
+  // GMT +8 = 28800
+  // GMT -1 = -3600
+  // GMT 0 = 0
+  timeClient.setTimeOffset(0);
+
+//conectando ao FireBase:
   Firebase.begin(&config, &auth);
-  Firebase.reconnectWiFi(true);
+  Firebase.reconnectWiFi(true); 
 }
 
 void loop(){
-  teste();
-  // Chamando Função Para Ativar sirene 
-  while(sensorvalueMQ2 > 700){
+// Obter data e hora:
+  timestamp();
+
+// Coleta de dados com MQs:
+  collect();
+  
+// Ativar sirene de alerta:
+  alert();
+
+// Espera de 5 segundos:
+delay(5000);
+}
+
+// Função para data e hora:
+void timestamp( ) {
+  //Conectando ao servidar time:
+  timeClient.update();
+
+  time_t epochTime = timeClient.getEpochTime();
+
+  // Data e Hora:
+  String formattedTime = timeClient.getFormattedTime();
+
+  //Pegando estrutura de tempo:
+  struct tm *ptm = gmtime ((time_t *)&epochTime); 
+
+  //Dia do mês:
+  int monthDay = ptm->tm_mday;
+
+  // mes:
+  int currentMonth = ptm->tm_mon+1;
+
+  // ano:
+  int currentYear = ptm->tm_year+1900;
+
+// Data e hora:
+  DateHora = String(monthDay) + "-" + String(currentMonth) + "-" + String(currentYear) +"|" + String(formattedTime);
+  Serial.print("Current date: ");
+  Serial.println(DateHora);
+}
+
+// Função para coleta de dados com MQs.
+void collect(){
+  sensorvalueMQ2 = ReadPin(mq2sensor);    // read the MQ2 sensor.
+  sensorvalueMQ8 = ReadPin(mq8sensor);    // read the MQ8 sensor.
+  sensorvalueMQ9 = ReadPin(mq9sensor);    // read the MQ9 sensor.
+
+// Enviando dados para Firebase (Data/Hora, valorInteiro):
+  Firebase.RTDB.setInt(&fbdo, "MQ2 Sensor/"+DateHora,sensorvalueMQ2); // Enviando dados para Firebase do MQ2.
+  Firebase.RTDB.setInt(&fbdo, "MQ8 Sensor/"+DateHora,sensorvalueMQ8); // Enviando dados para Firebase do MQ8.
+  Firebase.RTDB.setInt(&fbdo, "MQ9 Sensor/"+DateHora,sensorvalueMQ9); // Enviando dados para Firebase do MQ9.
+}
+
+// loop de jogo de led:
+void alert() {
+  while(sensorvalueMQ2 > 650){
     sirene(led1, led2, led3, led4);
     delay(150);
     sirene(led2, led1, led3, led4);
@@ -86,12 +163,12 @@ void loop(){
     delay(150);
     sirene(led4, led2, led3, led1);
     delay(150);
-    teste();
+    timestamp();
+    collect();
   }
-delay(5000);
 }
 
-// Função sirene alerta 
+// Função para ligar sirene alerta:
 void sirene(int n1, int n2, int n3, int n4){
   digitalWrite(n1, HIGH);
   digitalWrite(n2, LOW);
@@ -101,15 +178,15 @@ void sirene(int n1, int n2, int n3, int n4){
   digitalWrite(n1, LOW);
 }
 
-void teste(){
-    sensorvalueMQ2=analogRead(mq2sensor);    // read the MQ2 sensor
-//  sensorvalueMQ8=analogRead(mq8sensor);    // read the MQ8 sensor
-//  sensorvalueMQ9=analogRead(mq9sensor);    // read the MQ9 sensor
-  Serial.println(sensorvalueMQ2);
-//  Serial.println(sensorvalueMQ8);
-//  Serial.println(sensorvalueMQ9);
-  Firebase.RTDB.pushFloat(&fbdo, "MQ2 Sensor/Value",sensorvalueMQ2);
-//  Firebase.RTDB.pushFloat(&fbdo, "MQ8 Sensor/Value",sensorvalueMQ8);
-//  Firebase.RTDB.pushFloat(&fbdo, "MQ9 Sensor/Value",sensorvalueMQ9);
-
+//Função para multiplexar portas:
+int ReadPin(const byte &p){
+  int r;
+  digitalWrite(p, HIGH);
+  analogRead(A0);
+  r = analogRead(A0);
+  digitalWrite(p, LOW);
+  return r;
 }
+
+
+
