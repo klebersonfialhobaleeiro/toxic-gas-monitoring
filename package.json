@@ -2,9 +2,10 @@
   "name": "gas-monitoring",
   "version": "1.0.0",
   "description": "gas-monitoring vizualization",
-  "main": "index.js",
+  "private": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "author": "Jader Adriel",
   "license": "ISC",
