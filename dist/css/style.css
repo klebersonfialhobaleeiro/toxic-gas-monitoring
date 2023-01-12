@@ -21,7 +21,7 @@
   --dark-background: #121212;
   --color-white: #fff;
   --light-surface: #f8f8f9;
-  --light-background: #eeeeee;
+  --light-background: #e2e2e2;
   --dark-success: #44e657;
   --dark-danger: #ed4f4f;
   --dark-warning: #858525;
@@ -347,7 +347,7 @@ h1 {
 }
 .insights-container .insight__content__data {
   font-weight: 800;
-  padding: 0.8rem 0 0.8rem 0;
+  padding: 0.1rem 0 0.1rem 0;
   font-size: 1.8rem;
 }
 .insights-container .insight__content .text-muted {
@@ -527,16 +527,24 @@ h1 {
 }
 
 .graph {
+  padding: 1rem;
   margin-top: 1rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   border-radius: 0.8rem;
   background-color: var(--c-surface);
+  max-width: 100%;
 }
 .graph canvas {
-  width: 100%;
-  max-width: 25rem;
+  width: 25rem;
+  max-width: 100%;
   max-height: 25rem;
+}
+.graph canvas.small {
+  width: 12.5rem;
+  max-width: 100%;
+  max-height: 12.5rem;
 }
 
 /*# sourceMappingURL=style.css.map */

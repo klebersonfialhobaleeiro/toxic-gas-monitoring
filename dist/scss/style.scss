@@ -194,7 +194,7 @@ $border-radius-m: 1.2rem;
             
             &__data {
                 font-weight: 800;
-                padding: space.$s-04 0 space.$s-04 0;
+                padding: space.$s-01 0 space.$s-01 0;
                 font-size: 1.8rem;
             }
             .text-muted {
@@ -390,14 +390,22 @@ $border-radius-m: 1.2rem;
 
 
 .graph {
+    padding: space.$m-01;
     margin-top: space.$m-01;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     border-radius: $border-radius-s;
     background-color: var(--c-surface);
+    max-width: 100%;
     canvas {
-        width: 100%;
-        max-width: 25rem;
+        width: 25rem;
+        max-width: 100%;
         max-height: 25rem;
+        &.small {
+            width: 12.5rem;
+            max-width: 100%;
+            max-height: 12.5rem;
+        }
     }
 }
