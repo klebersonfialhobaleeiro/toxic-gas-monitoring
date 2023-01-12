@@ -36,7 +36,7 @@ int mq9sensor=13;
 int sensorvalueMQ2;
 int sensorvalueMQ8;
 int sensorvalueMQ9;
-int vasamento;
+int vazamento;
 int minutos;
 String DateHora;
 
@@ -145,10 +145,10 @@ void dataCollect(){
   sensorvalueMQ9 = ReadPin(mq9sensor);    // read the MQ9 sensor.
   
   leak();
-  if(vasamento > 550){
+  if(vazamento > 550){
     //Envia dados para Firebase (Data/Hora, valorInteiro):
-    Firebase.RTDB.setInt(&fbdo, "VASAMENTO/"+DateHora+"/VALOR",vasamento); // Enviando dados para Firebase do MQ2.
-    Firebase.RTDB.setString(&fbdo, "VASAMENTO/"+DateHora+"/MINUTOS/",minutos); // Enviando dados para Firebase do MQ2.
+    Firebase.RTDB.setInt(&fbdo, "VAZAMENTO/"+DateHora+"/VALOR",vazamento); // Enviando dados para Firebase do MQ2.
+    Firebase.RTDB.setString(&fbdo, "VAZAMENTO/"+DateHora+"/MINUTOS/",minutos); // Enviando dados para Firebase do MQ2.
 
   }
   Firebase.RTDB.setInt(&fbdo, "MQ2 Sensor/Valor",sensorvalueMQ2); // Enviando dados para Firebase do MQ2.
@@ -194,19 +194,19 @@ int ReadPin(const byte &p){
   return r;
 }
 
-// identificar vasamentos 
+// identificar vazamentos 
 int leak(){
   if(sensorvalueMQ2 > 550){
-    vasamento = sensorvalueMQ2;
+    vazamento = sensorvalueMQ2;
   }
   else if(sensorvalueMQ8 > 550){
-    vasamento = sensorvalueMQ8;
+    vazamento = sensorvalueMQ8;
   }
   else if(sensorvalueMQ2 > 550){
-    vasamento = sensorvalueMQ8;
+    vazamento = sensorvalueMQ8;
   }
   else{
-    vasamento = 0;
+    vazamento = 0;
   }
-  return vasamento;
+  return vazamento;
 }
