@@ -8,11 +8,16 @@
 
 > Esse projeto tem como objetivo o monitoramento da qualidade do ar utilizando a internet das coisas (IoTs), para alcançar esse objetivo, foi utilizado o Backend-as-a-service Firebase  e o módulo ESP8266
 
-## Começando
+## 💻 Pre-requesitos
 
-Para começar, instale as dependencias com o comando: `npm install`
-- Instale a biblioteca do firebase cliente [aqui](https://github.com/mobizt/Firebase-ESP8266)
+Antes de você começar, verifique se:
+* Você tem uma máquina `<Windows / Linux / Mac>`  .
+* Você tem a arduino IDE.
 
+
+
+
+## Execute localmente
 
 Clone o projeto
 
@@ -43,5 +48,41 @@ No diretorio do projeto, você pode rodar:
 
 Compila os arquivos em `src` no arquivo bundle.js
 
-
-<a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a>
+## 🤝 Colaboradores
+<table>
+  <tr>
+    <td align="center">
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/101850276?v=4" width="100px;" alt="Foto do Jader Adriel no GitHub"/><br>
+        <sub>
+          <b>Jader Adriel</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/61245039?v=4" width="100px;" alt="Foto do Kleberson Fialho no GitHub"/><br>
+        <sub>
+          <b>Kleberson Fialho</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/60711391?v=4" width="100px;" alt="Foto do Reinaldo Soares no GitHub"/><br>
+        <sub>
+          <b>Reinaldo Soares</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#">
+      <img alt="julyascruz's profile picture" class="x6umtig x1b1mbwd xaqea5y xav7gou xk390pu x5yr21d xpdipgo xdj266r x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x11njtxf xh8yej3" crossorigin="anonymous" draggable="false" src="https://instagram.fgnm2-1.fna.fbcdn.net/v/t51.2885-19/133292173_154454506105834_193334338089196957_n.jpg?stp=dst-jpg_s150x150&amp;_nc_ht=instagram.fgnm2-1.fna.fbcdn.net&amp;_nc_cat=110&amp;_nc_ohc=3yqW0LCUgxoAX_eP5Jl&amp;edm=AId3EpQBAAAA&amp;ccb=7-5&amp;oh=00_AfDjwpj1mtPc8GmZJ5w95TpAlj7KA5ys1G5-m3uoHaEtpw&amp;oe=63C5174D&amp;_nc_sid=705020" width="100px;" alt="Foto da Julya Cruz no Instagram"/><br>
+        <sub>
+          <b>Julya Cruz</b>
+        </sub>
+      </a>
+    </td>
+    
+  </tr>
+</table>
