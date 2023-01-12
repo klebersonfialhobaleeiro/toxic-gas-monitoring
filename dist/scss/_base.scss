@@ -3,6 +3,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600;700;800;900&display=swap');
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+
 html, body, .main-wrapper {
     // overflow-x: hidden;
     width: 100%;
@@ -16,9 +20,8 @@ html, body, .main-wrapper {
 .container {
     display: grid;
     max-width: 100%;
-    width: 96%;
+    width: 100%;
     margin: 0 auto;
-    padding-top: 0.6em;
     grid-template-areas:
 		"sidenav content content"
 	;
@@ -56,11 +59,6 @@ img {
 h1 {
     font-weight: 800;
     font-size: 1.4rem;
-}
-
-h2 {
-    font-weight: 600;
-    font-size: 1.2rem;
 }
 
 

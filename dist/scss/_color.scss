@@ -1,19 +1,20 @@
 :root {    
-    --primary : #3CCF4E;
+    --primary : #39B5E0;
     --primary-variant : #003865;
     --secondary : #EF5B0C;
 
-    --dark-surface : #2424242f;
+    --dark-surface : rgba(255, 255, 255, 0.03);
     --dark-background : #121212;
+
 
     --color-white: #fff;
 
     --light-surface : #f8f8f9;
     --light-background : #eeeeee;
 
-    --dark-success : #3CCF4E;
-    --dark-danger: #f08484;
-    --dark-warning : #d8d857;
+    --dark-success : #44e657;
+    --dark-danger: #ed4f4f;
+    --dark-warning : #858525;
 
     --dark-text-dark-color: ;
     --dark-text-light-color: ;
@@ -39,8 +40,10 @@
     --c-success : var(--light-success);
     --c-danger : var(--light-danger);
     --c-warning : var(--light-warning);
+    --boxShadowColor: black;
     --neutral: gray;
     color: black;
+
 }
 
 [data-theme="dark_mode"] {
@@ -49,6 +52,7 @@
     --c-success : var(--dark-success);
     --c-danger : var(--dark-danger);
     --c-warning : var(--dark-warning);
+    --boxShadowColor: rgb(204, 32, 32);
 
     color: #fff;
     ::-webkit-calendar-picker-indicator {

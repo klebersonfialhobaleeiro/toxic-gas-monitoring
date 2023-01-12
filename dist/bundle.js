@@ -31,6 +31,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/chart.js":
+/*!**********************!*\
+  !*** ./src/chart.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"chartConfig\": () => (/* binding */ chartConfig),\n/* harmony export */   \"updateChartValue\": () => (/* binding */ updateChartValue)\n/* harmony export */ });\n\nconst DATA_COUNT = 5;\nconst NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};\n\nconst labels = ['MQ-2', 'MQ-9', 'MQ-8'];\nconst data = {\n  labels: labels,\n  datasets: [\n    {\n      label: 'Sensors',\n      data: [0,0,0],\n      backgroundColor: ['#EF5B0C','#39B5E0', '#003865']\n    }\n  ]\n};\n\nconst config = {\n    type: 'polarArea',\n    data: data,\n    options: {\n      responsive: true,\n      plugins: {\n        legend: {\n          position: 'top',\n        },\n        title: {\n          display: true,\n          text: 'Gas monitoring'\n        }\n      }\n    },\n};\n\nconst ctx = document.getElementById('live-monitoring');\n\nconst chartConfig = {config, ctx}\n\nfunction updateChartValue(chart, value, label='MQ-2') {\n    const position = chart.data.labels.indexOf(label)\n\n    console.log({position, label }, chart.data.labels);\n\n    if ( position === -1 || !isFinite(value)) return\n\n    chart.data.datasets.forEach((dataset) => {\n        dataset.data[position] = Number(value);\n    });\n\n    chart.update()\n}\n\n\n\n//# sourceURL=webpack://gas-monitoring/./src/chart.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -38,7 +49,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_database__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/database */ \"./node_modules/firebase/database/dist/esm/index.esm.js\");\n\n\n\n\n\n//# sourceURL=webpack://gas-monitoring/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chart */ \"./src/chart.js\");\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_database__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/database */ \"./node_modules/firebase/database/dist/esm/index.esm.js\");\n\n\n\n\nconst firebaseConfig = {\n  apiKey: \"AIzaSyAeW-oRdds8R8GpJ08isjYwxD24yH9h8-I\",\n  authDomain: \"sensor-mqs.firebaseapp.com\",\n  databaseURL: \"https://sensor-mqs-default-rtdb.firebaseio.com\",\n  projectId: \"sensor-mqs\",\n  storageBucket: \"sensor-mqs.appspot.com\",\n  messagingSenderId: \"648901119376\",\n  appId: \"1:648901119376:web:97eb7af0816cd1a08b7715\"\n};\n\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_1__.initializeApp)(firebaseConfig);\nconst database = (0,firebase_database__WEBPACK_IMPORTED_MODULE_2__.getDatabase)();\n\nconst chart = new Chart(_chart__WEBPACK_IMPORTED_MODULE_0__.chartConfig.ctx, _chart__WEBPACK_IMPORTED_MODULE_0__.chartConfig.config);\n\nconst fields = [\n  {chartLabel:'MQ-2', firebasePath: '/MQ2 Sensor/Valor'}, \n  {chartLabel:'MQ-8', firebasePath: '/MQ8 Sensor/Valor'}, \n  {chartLabel:'MQ-9', firebasePath: '/MQ9 Sensor/Valor'},\n];\n\nfields.forEach((field) => {\n\n  const path = (0,firebase_database__WEBPACK_IMPORTED_MODULE_2__.ref)(database,  field.firebasePath);\n\n  (0,firebase_database__WEBPACK_IMPORTED_MODULE_2__.onValue)(path, (response) => {\n    const data = response.val();\n    console.log({data}, field.chartLabel);\n    (0,_chart__WEBPACK_IMPORTED_MODULE_0__.updateChartValue)(chart, data, field.chartLabel);\n  });\n});\n\n//# sourceURL=webpack://gas-monitoring/./src/index.js?");
 
 /***/ }),
 
@@ -202,7 +213,8 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	__webpack_require__("./src/index.js");
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/layout.js");
+/******/ 	__webpack_require__("./src/layout.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/chart.js");
 /******/ 	
 /******/ })()
 ;
