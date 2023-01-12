@@ -1,4 +1,4 @@
-// incluindo bibliotecas:
+//incluindo bibliotecas:
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <Firebase_ESP_Client.h>
@@ -6,35 +6,29 @@
 #include <WiFiUdp.h>
 
 //Definindo portas de ledes:
-#define led1 12
-#define led2 14
-#define led3 16
-#define led4 16
+#define led1 5
+#define led2 4
+#define led3 14
+#define led4 12
 
-// Insira suas credenciais de rede:
-#define WIFI_SSID "************" // Nome da rede WiFi.
-#define WIFI_PASSWORD "********" // Senha da rede WiFi.
+//Insira suas credenciais de rede:
+#define WIFI_SSID "REDE ABERTA " // Nome da rede WiFi.
+#define WIFI_PASSWORD "melemalu" // Senha da rede WiFi.
 
 //Dados do FireBase:
-#define API_KEY "****************"
-#define DATABASE_URL "******************************"
+#define API_KEY "AIzaSyAeW-oRdds8R8GpJ08isjYwxD24yH9h8-I"
+#define DATABASE_URL "https://sensor-mqs-default-rtdb.firebaseio.com/"
 
 //Definir cliente NTP para obter tempo:
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org");
-
-//Week Days:
-String weekDays[7]={"Domingo", "Segunda", "Terça", "Quarta", "Thursday", "Friday", "Saturday"};
-
-//Month names:
-String months[12]={"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
 //Definindo objetos do Firebase:
 FirebaseData fbdo;
 FirebaseAuth auth;
 FirebaseConfig config;
 
-// Declarando Variavesis:
+//Declarando Variavesis:
 bool signupOK = false;
 int mq2sensor=2;
 int mq8sensor=12;
@@ -42,12 +36,14 @@ int mq9sensor=13;
 int sensorvalueMQ2;
 int sensorvalueMQ8;
 int sensorvalueMQ9;
+int vasamento;
+int minutos;
 String DateHora;
 
 void setup(){
   Serial.begin(115200); // Monitor serial.
 
-// Declarando como pinos de saida:
+  //Declarando como pinos de saida:
   pinMode(led1, OUTPUT); //Led
   pinMode(led2, OUTPUT); //Led
   pinMode(led3, OUTPUT); //Led
@@ -84,14 +80,14 @@ void setup(){
     Serial.printf("%s\n", config.signer.signupError.message.c_str()); // Mensagem de erro de coneção ao Firebase.
   }
   
-// Inicialize um NTPClient para obter tempo:
+  //Inicialize um NTPClient para obter tempo:
   timeClient.begin();
   // Set offset time in seconds to adjust for your timezone, for example:
   // GMT +1 = 3600
   // GMT +8 = 28800
   // GMT -1 = -3600
   // GMT 0 = 0
-  timeClient.setTimeOffset(0);
+  timeClient.setTimeOffset(-10800);
 
 //conectando ao FireBase:
   Firebase.begin(&config, &auth);
@@ -99,28 +95,31 @@ void setup(){
 }
 
 void loop(){
-// Obter data e hora:
-  timestamp();
+  //Obter data e hora:
+  timeStamp();
 
-// Coleta de dados com MQs:
-  collect();
+  //Coleta de dados com MQs:
+  dataCollect();
   
-// Ativar sirene de alerta:
+  //Ativar sirene de alerta:
   alert();
 
-// Espera de 5 segundos:
+//Espera de 5 segundos:
 delay(5000);
 }
 
-// Função para data e hora:
-void timestamp( ) {
+//Função para data e hora:
+void timeStamp( ) {
   //Conectando ao servidar time:
   timeClient.update();
 
   time_t epochTime = timeClient.getEpochTime();
 
-  // Data e Hora:
-  String formattedTime = timeClient.getFormattedTime();
+  int currentHour = timeClient.getHours();  
+  //Horas
+
+  //Minutos
+  int currentMinute = timeClient.getMinutes();
 
   //Pegando estrutura de tempo:
   struct tm *ptm = gmtime ((time_t *)&epochTime); 
@@ -128,47 +127,54 @@ void timestamp( ) {
   //Dia do mês:
   int monthDay = ptm->tm_mday;
 
-  // mes:
+  //Mês:
   int currentMonth = ptm->tm_mon+1;
 
-  // ano:
+  //Ano:
   int currentYear = ptm->tm_year+1900;
 
-// Data e hora:
-  DateHora = String(monthDay) + "-" + String(currentMonth) + "-" + String(currentYear) +"|" + String(formattedTime);
-  Serial.print("Current date: ");
-  Serial.println(DateHora);
+  // Data e hora:
+  DateHora = String(currentMonth) +  "-" + String(currentYear) + "/" + "DIA" + String(monthDay) + "/" + String(currentHour) + "HR";
+  minutos = currentMinute;
 }
 
-// Função para coleta de dados com MQs.
-void collect(){
+//Coleta de dados com MQs.
+void dataCollect(){
   sensorvalueMQ2 = ReadPin(mq2sensor);    // read the MQ2 sensor.
   sensorvalueMQ8 = ReadPin(mq8sensor);    // read the MQ8 sensor.
   sensorvalueMQ9 = ReadPin(mq9sensor);    // read the MQ9 sensor.
+  
+  leak();
+  if(vasamento > 550){
+    //Envia dados para Firebase (Data/Hora, valorInteiro):
+    Firebase.RTDB.setInt(&fbdo, "VASAMENTO/"+DateHora+"/VALOR",vasamento); // Enviando dados para Firebase do MQ2.
+    Firebase.RTDB.setString(&fbdo, "VASAMENTO/"+DateHora+"/MINUTOS/",minutos); // Enviando dados para Firebase do MQ2.
 
-// Enviando dados para Firebase (Data/Hora, valorInteiro):
-  Firebase.RTDB.setInt(&fbdo, "MQ2 Sensor/"+DateHora,sensorvalueMQ2); // Enviando dados para Firebase do MQ2.
-  Firebase.RTDB.setInt(&fbdo, "MQ8 Sensor/"+DateHora,sensorvalueMQ8); // Enviando dados para Firebase do MQ8.
-  Firebase.RTDB.setInt(&fbdo, "MQ9 Sensor/"+DateHora,sensorvalueMQ9); // Enviando dados para Firebase do MQ9.
+  }
+  Firebase.RTDB.setInt(&fbdo, "MQ2 Sensor/Valor",sensorvalueMQ2); // Enviando dados para Firebase do MQ2.
+  Firebase.RTDB.setInt(&fbdo, "MQ8 Sensor/Valor",sensorvalueMQ8); // Enviando dados para Firebase do MQ8.
+  Firebase.RTDB.setInt(&fbdo, "MQ9 Sensor/Valor",sensorvalueMQ9); // Enviando dados para Firebase do MQ9.
+
+  Serial.println(sensorvalueMQ2); //Imprime valor no monitor serial
 }
 
-// loop de jogo de led:
+//loop do jogo de lede:
 void alert() {
-  while(sensorvalueMQ2 > 650){
-    sirene(led1, led2, led3, led4);
-    delay(150);
-    sirene(led2, led1, led3, led4);
-    delay(150);
-    sirene(led3, led2, led1, led4);
-    delay(150);
-    sirene(led4, led2, led3, led1);
-    delay(150);
-    timestamp();
-    collect();
+  while(sensorvalueMQ2 > 890){
+    int cont=0;
+    while(cont < 5){
+      sirene(led1, led2, led3, led4);
+      sirene(led2, led1, led3, led4);
+      sirene(led3, led2, led1, led4);
+      sirene(led4, led2, led3, led1);
+    cont = cont + 1;
+    }
+    timeStamp();
+    dataCollect();
   }
 }
 
-// Função para ligar sirene alerta:
+//Ligar sirene alerta:
 void sirene(int n1, int n2, int n3, int n4){
   digitalWrite(n1, HIGH);
   digitalWrite(n2, LOW);
@@ -178,7 +184,7 @@ void sirene(int n1, int n2, int n3, int n4){
   digitalWrite(n1, LOW);
 }
 
-//Função para multiplexar portas:
+//multiplexar portas:
 int ReadPin(const byte &p){
   int r;
   digitalWrite(p, HIGH);
@@ -188,5 +194,19 @@ int ReadPin(const byte &p){
   return r;
 }
 
-
-
+// identificar vasamentos 
+int leak(){
+  if(sensorvalueMQ2 > 550){
+    vasamento = sensorvalueMQ2;
+  }
+  else if(sensorvalueMQ8 > 550){
+    vasamento = sensorvalueMQ8;
+  }
+  else if(sensorvalueMQ2 > 550){
+    vasamento = sensorvalueMQ8;
+  }
+  else{
+    vasamento = 0;
+  }
+  return vasamento;
+}
