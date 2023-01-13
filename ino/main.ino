@@ -130,7 +130,7 @@ void loop(){
 
     //Coleta de dados com MQs:
     dataCollect();
-    showMMq2Gas()
+    showMq2Gas();
     //Ativar sirene de alerta:
     alert();
 
@@ -138,7 +138,7 @@ void loop(){
     delay(5000);
 }
 
-void showMMq2Gas () {
+void showMq2Gas () {
     Serial.print("LPG:"); 
     Serial.print(MQGetGasPercentage(MQRead(mq2sensor)/Ro,GAS_LPG) );
     Serial.print( "ppm" );
