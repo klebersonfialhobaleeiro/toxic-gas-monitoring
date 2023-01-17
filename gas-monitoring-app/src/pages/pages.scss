@@ -1,0 +1,51 @@
+@use './../styles/variables';
+
+.section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: variables.$m-01;
+    gap: variables.$m-01;
+    &__header {
+        &__title {}
+    }
+    &__content {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: variables.$m-01;
+        margin-top: variables.$m-02;
+    }
+    &__footer {}
+}
+
+.graph-article {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: fit-content;
+    border-radius: variables.$border-radius-s;
+    padding: variables.$s-04 variables.$m-03 variables.$s-04 variables.$m-03;
+    gap: variables.$m-01;
+    &__title {
+        width:  100%;
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+    .graph {
+        border: 1px solid var(--border-color);
+        border-radius: variables.$border-radius-s;
+        width: 100%;
+        canvas {
+            padding: variables.$s-04;
+        }
+        .data {
+            width: 100%;
+            background-color: var(--c-surface);
+            padding: variables.$s-04;
+            text-align: center;
+            font-size: 1rem;
+        }
+    }
+}

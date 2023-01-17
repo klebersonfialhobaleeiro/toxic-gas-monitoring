@@ -1,0 +1,90 @@
+
+@use './../styles/variables';
+
+
+.main-aside {
+    // box-shadow: var(--box-shadow1);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: variables.$m-01;
+    position: relative;
+    padding-left: 1rem;
+    padding-top: 0.6em;
+    @media screen and (max-width: 900px) and (min-width: 700px) {
+        .sidebar__item__label, .logo h2 {
+            display: none;
+        }
+        width: 3.5rem;
+        .sidebar__item {
+            width: 3.5rem;
+            &:hover {
+                background-color: var(--c-background);
+                border-radius:variables.$border-radius-s;
+                padding-right: variables.$m-01;
+                .sidebar__item__label {
+                    display: block;
+                }
+                width: max-content;
+            }
+        }
+    }
+    @media screen and (max-width: 700px) {
+        display: none;
+        top: 0;
+        padding-top: variables.$m-01;
+        position: fixed;
+        z-index: 2;
+        width: 70%;
+        background-color: var(--c-background);
+    }
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex-grow: 1;
+    height: 100%;
+    &__item {
+        $bar_width : variables.$s-02;
+        padding-left: variables.$m-01;
+        height: 3.6rem;
+        display: flex;
+        align-items: center;
+        gap: variables.$s-02;
+        color: var(--color-info-dark);
+        position: relative;
+        transition: all 300ms ease;
+        width:100%;
+
+        &__label {
+            font-weight: 500;
+            font-size: 0.87rem;
+        }
+        &__icon {
+            font-size: 1.6rem;
+        }
+
+        
+
+        &.active {
+            background-color: var(--color-light);
+            
+            &::before {
+                position: absolute;
+                left: 0;
+                content: '';
+                width: $bar_width;
+                height: 100%;
+                background-color: var(--primary);
+            }
+        }
+
+        &:hover:not(.active) {
+            color: var(--primary);
+            padding-left: variables.$s-04;
+        }
+    }
+}
+

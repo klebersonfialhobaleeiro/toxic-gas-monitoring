@@ -1,0 +1,34 @@
+
+@use './../styles/variables';
+
+.theme-toggler {
+    background-color: var(--color-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 4.7rem;
+    height: 1.6rem;
+    cursor: pointer;
+    border-radius: variables.$border-radius-xs;
+    
+    .toggler__icon {
+        font-size: 0.4rem;
+        padding: 0.2rem;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.active {
+            background-color: var(--primary);
+            color: #fff;
+        }
+        &#light-btn.active {
+            border-radius: variables.$border-radius-xs 0px 0px variables.$border-radius-xs;
+        }
+        &#dark-btn.active {
+            border-radius: 0 variables.$border-radius-xs variables.$border-radius-xs 0;
+        }
+    }
+}

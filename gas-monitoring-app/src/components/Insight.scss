@@ -1,0 +1,70 @@
+@use './../styles/variables';
+
+
+.insights-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: variables.$m-01;
+    margin-top: variables.$m-02;
+
+    .insight {
+        flex-grow: 1;
+        height: fit-content;
+        // background-color: var(--c-surface);
+        padding: variables.$s-04 variables.$m-03 variables.$s-04 variables.$m-03;
+        border-radius: variables.$border-radius-s;
+        display: grid;
+        grid-template-areas:
+		"header header"
+		"content graph"
+		"content  ."
+		;
+
+        border: 1px solid var(--border-color);
+        // box-shadow: var(--box-shadow1);
+        
+        &:hover {
+            box-shadow: none;
+        }
+        &__header {
+            grid-area: header;
+            width: 100%;
+            &__icon {
+                width: 2rem;
+                height: 2rem;
+                font-size: 1rem;
+                padding: variables.$s-02;
+                border-radius: 50%;
+                color: rgb(0, 0, 0);
+            }
+            &__title { 
+                font-size: 1rem;
+                // padding: variables.$s-04 0 0 0;
+            }
+        }
+
+        &__content {
+            grid-area: content;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            
+            &__data {
+                font-weight: 800;
+                padding: variables.$s-01 0 variables.$s-01 0;
+                font-size: 1.8rem;
+            }
+            .text-muted {
+                font-size: 0.87rem;
+            }
+        }
+        
+        &__graph {
+            grid-area: graph;
+            width: 100%;
+            max-width: 6rem;
+            max-height: 6rem;
+        }
+    }
+}

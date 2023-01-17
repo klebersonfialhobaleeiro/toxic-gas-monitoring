@@ -1,0 +1,128 @@
+
+:root {    
+    --primary : #39B5E0;
+    --primary-variant : #003865;
+    --secondary : #EF5B0C;
+
+    --dark-surface : #161b22;
+    --dark-background : #0d1117;
+    --border-color-dark : #30363d;
+
+    --color-white: #fff;
+
+    --light-surface : #ffffff;
+    --light-background : #ffffff;
+
+    --dark-success : #44e657;
+    --dark-danger: #ed4f4f;
+    --dark-warning : #e4e418;
+
+    --dark-text-dark-color: ;
+    --dark-text-light-color: ;
+
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.1);
+    --color-dark-variant: #677483;
+
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce1eb;
+
+    --light-success : #3CCF4E;
+    --light-danger: #f34d4d;
+    --light-warning : #e4e418;
+
+    --neutral : gray;
+
+}
+
+[data-theme="light_mode"] {
+    --border-color: #d0d7de;
+    --c-background: var(--light-background);
+    --c-surface: var(--light-surface);
+    --c-success : var(--light-success);
+    --c-danger : var(--light-danger);
+    --c-warning : var(--light-warning);
+    --boxShadowColor: black;
+    --neutral: gray;
+    color: black;
+    --text-color: black;
+
+}
+
+[data-theme="dark_mode"] {
+    --border-color: var(--border-color-dark );
+    --c-background: var(--dark-background);
+    --c-surface: var(--dark-surface);
+    --c-success : var(--dark-success);
+    --c-danger : var(--dark-danger);
+    --c-warning : var(--dark-warning);
+    --boxShadowColor: rgb(204, 32, 32);
+
+    --text-color: #fff;
+    color: #fff;
+    ::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+    }
+}
+
+[data-theme="light_mode"] {
+    --box-shadow1: 0px 1px 5px 1px rgba(0,0,0,0.16);
+}
+[data-theme="dark_mode"] {
+    --box-shadow1:  0px 4px 5px 0px hsla(0,0%,0%,0.14), 
+    0px 1px 10px 0px hsla(0,0%,0%,0.12), 
+    0px 2px 4px -1px hsla(0,0%,0%,0.2);
+}
+
+.primary {
+    color: var(--primary);
+}
+
+.primary-variant {
+    color: var(--primary-variant);
+}
+
+.secondary {
+    color: var(--secondary);
+}
+
+.bg-primary {
+    background-color: var(--primary);
+}
+
+.bg-primary-variant {
+    background-color: var(--primary-variant);
+}
+
+.bg-secondary {
+    background-color: var(--secondary);
+}
+
+.danger {
+    color: var(--c-danger);
+}
+
+.warning {
+    color: var(--c-warning);
+}
+
+.sucess {
+    color: var(--c-success);
+}
+
+.bg-muted {
+    background-color: var(--neutral);
+}
+.bg-sucess {
+    background-color: var(--c-success);
+}
+.bg-warning {
+    background-color: var(--c-warning);
+}
+.bg-danger {
+    background-color: var(--c-danger);
+}
+
+.text-muted {
+    color: var(--color-info-dark);
+}
