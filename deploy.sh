@@ -1,22 +1,25 @@
-set -e
 
-# build
+# !/bin/bash
+
+echo "Buildando arquido"
+
 npm run build
 
-# navigate into the build output directory
-cd dist
+echo "build feito\n"
 
-# place .nojekyll to bypass Jekyll processing
-echo > .nojekyll
+echo "mudando de branch\n"
 
-# if you are deploying to a custom domain
-# echo 'www.example.com' > CNAME
+git checkout -B gh-pages
 
-git init
-git checkout -B main
-git add -A
+# git add -A
+git merge main
+
+echo "fazendo commit\n"
+
+git add .
+
 git commit -m 'deploy'
 
-git push -f git@github.com:jaderadriel/toxic-gas-monitoring.git main:gh-pages
+echo "fazendo o push\n"
 
-cd -
+git push 
