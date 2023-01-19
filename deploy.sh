@@ -5,6 +5,10 @@ echo "mudando para a branch de produção\n"
 
 git checkout -B gh-pages
 
+echo "Pegando o código da branch main"
+
+git merge main
+
 echo "Fazendo build do projeto"
 
 npm run build
@@ -14,8 +18,6 @@ echo "build feito\n"
 # git add -A
 
 echo "\n\nFazendo o merge da branch 'main'\n\n"
-
-git merge main
 
 git add .
 
