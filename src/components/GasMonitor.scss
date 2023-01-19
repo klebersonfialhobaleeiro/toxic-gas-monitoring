@@ -5,7 +5,7 @@
     flex-grow: 1;
     height: fit-content;
     background-color: var(--c-surface);
-    padding: variables.$s-04 variables.$m-03 variables.$s-04 variables.$m-03;
+    padding: variables.$s-03 variables.$m-02;
     border-radius: variables.$border-radius-s;
     display: grid;
     grid-template-areas:
@@ -20,14 +20,14 @@
         "content content"
         "graph  graph"
         ;
-        padding: variables.$s-02;
+        padding: variables.$m-01;
         place-items: center;
 
         footer { display: none;}
     }
 
-    border: 1px solid var(--border-color);
-    // box-shadow: var(--box-shadow1);
+    // border: 1px solid var(--border-color);
+    box-shadow: var(--box-shadow1);
     
     &:hover {
         box-shadow: none;
@@ -74,6 +74,8 @@
     
     &__graph {
         grid-area: graph;
+        display: flex;
+        justify-content: center;
         width: 100%;
         max-width: 15rem;
         max-height: 10rem;

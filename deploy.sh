@@ -1,22 +1,34 @@
-set -e
+# !/bin/bash
 
-# build
+
+echo "mudando para a branch de produção\n"
+
+git checkout -B gh-pages
+
+echo "Pegando o código da branch main"
+
+git merge main
+
+echo "Fazendo build do projeto"
+
 npm run build
 
-# navigate into the build output directory
-cd dist
+echo "build feito\n"
 
-# place .nojekyll to bypass Jekyll processing
-echo > .nojekyll
+# git add -A
 
-# if you are deploying to a custom domain
-# echo 'www.example.com' > CNAME
+echo "\n\nFazendo o merge da branch 'main'\n\n"
 
-git init
-git checkout -B main
-git add -A
+git add .
+
+echo "\n\nCommitando mudanças\n"
+
 git commit -m 'deploy'
 
-git push -f git@github.com:jaderadriel/toxic-gas-monitoring.git main:gh-pages
+echo "\n\nEnviando alterações para a produção\n"
 
-cd -
+git push 
+
+echo "Voltando para a branch main"
+
+git checkout main

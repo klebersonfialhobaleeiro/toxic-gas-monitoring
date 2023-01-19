@@ -11,6 +11,10 @@
     position: relative;
     padding-left: 1rem;
     padding-top: 0.6em;
+    transition: all 0.2s linear;
+    background-color: var(--c-surface);
+    animation: showElement 400ms linear forwards;
+
     @media screen and (max-width: 900px) and (min-width: 700px) {
         .sidebar__item__label, .logo h2 {
             display: none;
@@ -37,6 +41,28 @@
         z-index: 2;
         width: 70%;
         background-color: var(--c-background);
+    }
+
+    &.hide {
+        animation: hideElement 400ms linear forwards;
+    }
+
+    @keyframes hideElement {
+        0% {
+            left: 0;
+        }
+        to {
+            left: -100%;
+        }
+    }
+
+    @keyframes showElement {
+        0% {
+            left: -100%;
+        }
+        to {
+            left: 0;
+        }
     }
 }
 

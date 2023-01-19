@@ -8,8 +8,10 @@ function Navbar({changeTheme}) {
 
     function handleClick() {
         const sidebar = document.querySelector('.main-aside');
-        console.log(sidebar);
-        sidebar.style.display = "block"
+        if (sidebar.classList.contains('hide')) {
+            sidebar.classList.remove('hide');
+        }
+        sidebar.style.display = 'block';
     }
 
     return (

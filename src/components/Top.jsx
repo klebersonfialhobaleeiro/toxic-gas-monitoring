@@ -8,7 +8,8 @@ function Top() {
 
     function handleClick() {
         const sidebar = document.querySelector('.main-aside');
-        sidebar.style.display = "none"
+        sidebar.classList.add('hide')
+        // sidebar.style.display = "none";
     }
 
     return (
