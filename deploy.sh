@@ -27,4 +27,6 @@ echo "\n\nEnviando alterações para a produção\n"
 
 git push 
 
-git checkout main "Voltando para a branch main"
+echo "Voltando para a branch main"
+
+git checkout main
