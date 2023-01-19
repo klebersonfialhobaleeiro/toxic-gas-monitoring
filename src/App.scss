@@ -17,8 +17,15 @@
     padding:  variables.$m-01 ;
 }
 
+h1 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin:  1rem 0;
+}
 
 html, body, .main-wrapper {
+    transition: background-color 0.2s linear;
+
     // overflow-x: hidden;
     width: 100%;
     height: max-content;

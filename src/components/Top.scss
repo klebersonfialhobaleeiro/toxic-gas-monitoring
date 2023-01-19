@@ -4,6 +4,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: variables.$m-01;
+    #close-btn {
+        height: 2rem;
+        width: 2rem;
+        font-size: 1rem;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
     .logo {
         height: 2rem;
         display: flex;
