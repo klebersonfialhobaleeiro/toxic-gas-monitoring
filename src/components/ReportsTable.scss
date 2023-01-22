@@ -1,0 +1,91 @@
+@use './../styles/variables';
+
+.table {
+    width: 100%;
+    padding: variables.$m-01;
+    border-radius: variables.$border-radius-s;
+    text-align: center;
+    border-collapse: collapse; 
+
+    &:hover {
+        box-shadow: none;
+    }
+
+    thead {
+        th {
+            padding: 0.4rem;
+        }
+    }
+
+    tr:hover {
+        background-color: var(--border-color);
+    }
+
+    tbody {
+        @media screen and (max-width: 600px)  {
+            tr {
+                background-color: var(--c-surface);
+            }
+
+        }
+        tr {
+            padding: 0 variables.$s-04 variables.$s-04 variables.$s-04;
+            border: none;
+            border-radius: variables.$border-radius-s;
+        }
+        td {
+            height: 2.8rem;
+            font-size: 0.85rem;
+            border: none;
+            border-bottom: 1px inset var(--border-color) ;
+        }
+    }
+
+    @media screen and (min-width: 600px) {
+        td {
+            width: 33%;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        border: 0;
+        thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+        tr {
+            border-bottom: 3px solid #ddd;
+            display: block;
+            margin-bottom: variables.$s-02;
+        }
+        td {
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: .8em;
+            text-align: right;
+        }
+        td::before {
+            /*
+            * aria-label has no advantage, it won't be read inside a table
+            content: attr(aria-label);
+            */
+            content: attr(data-label);
+            font-weight: bold;
+            text-transform: uppercase;
+          }
+        .actions {
+            width: 100%;
+            font-size: 1rem;
+
+        }
+    }
+
+}

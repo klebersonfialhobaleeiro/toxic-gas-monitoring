@@ -8,10 +8,10 @@ export function updateGasChart(chart, value, maxValue) {
     }
     let color = GREEN_COLOR;
     chart.data.datasets[0].data[0] = Number(value);
-    chart.data.datasets[0].data[1] = maxValue - Number(value);
-  
-    if (value > (maxValue / 3    ) ) color = YELLOW_COLOR;
-    if (value > (maxValue / 3 * 2) ) color = RED_COLOR;
+    chart.data.datasets[0].data[1] = maxValue > value ? maxValue - Number(value) : 0;
+    
+    if (value > 500 ) color = YELLOW_COLOR;
+    if (value > 700 ) color = RED_COLOR;
   
     chart.data.datasets[0].backgroundColor[0] = color;
     

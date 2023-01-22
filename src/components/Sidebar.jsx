@@ -18,7 +18,7 @@ function Sidebar({ active }) {
             icon: <MdOutlineAutoGraph className='sidebar__item__icon'/>
         },
         {
-            label: 'Reports', path : '/Reports',
+            label: 'Reports', path : '/reports',
             icon: <MdReportGmailerrorred className='sidebar__item__icon'/>
         }
     ]

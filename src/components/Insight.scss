@@ -11,7 +11,7 @@
     .insight {
         flex-grow: 1;
         height: fit-content;
-        // background-color: var(--c-surface);
+        background-color: var(--c-surface);
         padding: variables.$s-04 variables.$m-03 variables.$s-04 variables.$m-03;
         border-radius: variables.$border-radius-s;
         display: grid;
@@ -21,8 +21,8 @@
 		"content  ."
 		;
 
-        border: 1px solid var(--border-color);
-        // box-shadow: var(--box-shadow1);
+        // border: 1px solid var(--border-color);
+        box-shadow: var(--box-shadow1);
         
         &:hover {
             box-shadow: none;
