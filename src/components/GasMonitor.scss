@@ -29,9 +29,6 @@
     // border: 1px solid var(--border-color);
     box-shadow: var(--box-shadow1);
     
-    &:hover {
-        box-shadow: none;
-    }
     &__header {
         grid-area: header;
         width: 100%;

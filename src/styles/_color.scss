@@ -11,7 +11,7 @@
     --color-white: #fff;
 
     --light-surface : #ffffff;
-    --light-background : #ffffff;
+    --light-background : #f8f8f8;
 
     --dark-success : #44e657;
     --dark-danger: #ed4f4f;
@@ -44,7 +44,7 @@
     --c-warning : var(--light-warning);
     --boxShadowColor: black;
     --neutral: gray;
-    color: black;
+    color: #333333;
     --text-color: black;
 
 }
@@ -66,10 +66,10 @@
 }
 
 [data-theme="light_mode"] {
-    --box-shadow1: 0px 1px 5px 1px rgba(0,0,0,0.16);
+    --box-shadow1: 0px 1px 5px 1px rgba(0, 0, 0, 0.089);
 }
 [data-theme="dark_mode"] {
-    --box-shadow1:  0px 4px 5px 0px hsla(0,0%,0%,0.14), 
+    --box-shadow1:  0px 4px 5px 0px hsla(0,0%,0%,0.089), 
     0px 1px 10px 0px hsla(0,0%,0%,0.12), 
     0px 2px 4px -1px hsla(0,0%,0%,0.2);
 }

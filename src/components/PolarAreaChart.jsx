@@ -9,6 +9,7 @@ import './HalfPieChart.scss'
 function PolarAreaChart({initialData, callbackUpdate , size='big', options = {}}) {
     
     const chartOption = options.options
+    const chartReference = useRef();
 
     const sensorsInfo = [
         {chartLabel:'MQ-2', firebasePath: '/MQ2 Sensor/Valor'}, 
@@ -22,20 +23,20 @@ function PolarAreaChart({initialData, callbackUpdate , size='big', options = {}}
       
         onValue(path, (response) => {
           const data = response.val();
-          updateData(data, s.chartLabel)
+          updateData(data, s.chartLabel, chartReference )
         });
     });
 
-    const chartReference = useRef();
 
-
-    function updateData(value, label) {
+    function updateData(value, label, ref) {
         
-        const chart = chartReference.current;
-        
-        if (callbackUpdate) {
-            callbackUpdate(chart, value, label);
+        if (ref) {
+            const chart = ref.current;
+            if (callbackUpdate) {
+                callbackUpdate(chart, value, label);
+            }
         }
+        
     }
 
     return (

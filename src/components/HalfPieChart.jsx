@@ -13,6 +13,7 @@ function HalfPieChart({initialData, path, size, callbackUpdate , dataRef,  maxVa
         rotation : -90,
         circumference : 180,
         responsive: true,
+        events: [],
         plugins: {
             legend: {
                 display: false // This hides all text in the legend and also the labels.

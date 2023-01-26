@@ -36,6 +36,8 @@ export const sensorsOptions = {
       },
       scales: {
         r: {
+          min: 0,
+          max: 1024,
           ticks: {
             color: 'black',
             z : 2,
