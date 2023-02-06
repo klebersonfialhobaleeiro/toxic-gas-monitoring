@@ -19,22 +19,18 @@ function ReportsTable() {
             
             for ( let hours in daysValue) {
             //   day = day[3]+day[4]
-            console.log(day);
-              const cleanData = {
+            const cleanData = {
                 sensor: 'mq-2' ,
                 date : `${day[3]+day[4]}-${month} ${hours[0]+hours[1]}:${daysValue[hours].MINUTOS}`, 
                 value : daysValue[hours].VALOR
-              }
-              
+            }
               dataset.push(cleanData);
             }
           }
           
         }
-        setReports(dataset)
+        setReports(dataset.reverse())
     }
-    console.log('renderixou');
-    console.log(reports);
 
     useEffect(() => {
         
