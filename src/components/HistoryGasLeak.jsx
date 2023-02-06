@@ -66,10 +66,9 @@ function HistoryGasLeak() {
         for ( let hours in daysValue) {
           
           const cleanData = { 
-            x : `${month}-${day} ${hours} `, 
+            x : `${day[3]+day[4]}-${month} ${hours[0]+hours[1]}:${daysValue[hours].MINUTOS}`, 
             y : daysValue[hours].VALOR
           }
-          
           dataset.push(cleanData);
 
         }
@@ -79,6 +78,7 @@ function HistoryGasLeak() {
     }
     const chart = history.current;
     chart.data.datasets[0].data = dataset;
+
     chart.update()
     
   }
