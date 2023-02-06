@@ -1,6 +1,4 @@
-import React from 'react'
-import { database as db } from './../utils/firebase';
-import { onValue, ref } from 'firebase/database';
+import React from 'react';
 import Sidebar from './../components/Sidebar';
 import Navbar from './../components/Navbar';
 import ReportsTable from '../components/ReportsTable';
