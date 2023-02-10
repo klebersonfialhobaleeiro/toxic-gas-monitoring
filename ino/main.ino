@@ -1,15 +1,19 @@
-#include <Arduino.h>
+#include <MQ2.h>
 #include <ESP8266WiFi.h>
 #include <Firebase_ESP_Client.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
+MQ2 mq2(A0);
+
+/*  */
 //Definindo portas de ledes:
 #define led1 5
 #define led2 4
 #define led3 14
 #define led4 12
 
+float lpg, co, smoke;
 //Insira suas credenciais de rede:
 #define WIFI_SSID "REDE ABERTA " // Nome da rede WiFi.
 #define WIFI_PASSWORD "melemalu" // Senha da rede WiFi.
@@ -29,31 +33,23 @@ FirebaseConfig config;
 
 //Declarando Variavesis:
 bool signupOK = false;
-int mq2sensor=2;
-int mq8sensor=12;
-int mq9sensor=13;
 int sensorvalueMQ2;
 int sensorvalueMQ8;
 int sensorvalueMQ9;
-int vasamento;
+int vazamento;
 int minutos;
 String DateHora;
 
 void setup(){
-  Serial.begin(115200); // Monitor serial.
+  Serial.begin(9600); // Monitor serial.
+
+  mq2.begin();
 
   //Declarando como pinos de saida:
   pinMode(led1, OUTPUT); //Led
   pinMode(led2, OUTPUT); //Led
   pinMode(led3, OUTPUT); //Led
   pinMode(led4, OUTPUT); //Led
-  pinMode(mq2sensor, OUTPUT); //MQ2 sensor.
-  pinMode(mq8sensor, OUTPUT); //MQ8 sensor.
-  pinMode(mq9sensor, OUTPUT); //MQ9 sensor.
-
-  digitalWrite(mq2sensor, LOW); 
-  digitalWrite(mq8sensor, LOW); 
-  digitalWrite(mq9sensor, LOW); 
 
   //Conecta ao WiFi:
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -81,11 +77,6 @@ void setup(){
   
   //Inicialize um NTPClient para obter tempo:
   timeClient.begin();
-  // Set offset time in seconds to adjust for your timezone, for example:
-  // GMT +1 = 3600
-  // GMT +8 = 28800
-  // GMT -1 = -3600
-  // GMT 0 = 0
   timeClient.setTimeOffset(-10800);
 
 //conectando ao FireBase:
@@ -139,21 +130,27 @@ void timeStamp( ) {
 
 //Coleta de dados com MQs.
 void dataCollect(){
-  sensorvalueMQ2 = ReadPin(mq2sensor);    // read the MQ2 sensor.
-  sensorvalueMQ8 = ReadPin(mq8sensor);    // read the MQ8 sensor.
-  sensorvalueMQ9 = ReadPin(mq9sensor);    // read the MQ9 sensor.
+  sensorvalueMQ2 = analogRead(A0);    // read the MQ2 sensor.
+  sensorvalueMQ8 = analogRead(13);    // read the MQ8 sensor.
+  sensorvalueMQ9 = analogRead(2);    // read the MQ9 sensor.
   
   leak();
-  if(vasamento > 550){
+  if(vazamento > 550){
     //Envia dados para Firebase (Data/Hora, valorInteiro):
-    Firebase.RTDB.setInt(&fbdo, "VASAMENTO/"+DateHora+"/VALOR",vasamento); // Enviando dados para Firebase do MQ2.
-    Firebase.RTDB.setString(&fbdo, "VASAMENTO/"+DateHora+"/MINUTOS/",minutos); // Enviando dados para Firebase do MQ2.
+    Firebase.RTDB.setInt(&fbdo, "VAZAMENTO/"+DateHora+"/VALOR",vazamento); // Enviando dados para Firebase do MQ2.
+    Firebase.RTDB.setString(&fbdo, "VAZAMENTO/"+DateHora+"/MINUTOS/",minutos); // Enviando dados para Firebase do MQ2.
 
   }
   Firebase.RTDB.setInt(&fbdo, "MQ2 Sensor/Valor",sensorvalueMQ2); // Enviando dados para Firebase do MQ2.
-  Firebase.RTDB.setInt(&fbdo, "MQ8 Sensor/Valor",sensorvalueMQ8); // Enviando dados para Firebase do MQ8.
-  Firebase.RTDB.setInt(&fbdo, "MQ9 Sensor/Valor",sensorvalueMQ9); // Enviando dados para Firebase do MQ9.
+  //Firebase.RTDB.setInt(&fbdo, "MQ8 Sensor/Valor",sensorvalueMQ8); // Enviando dados para Firebase do MQ8.
+  //Firebase.RTDB.setInt(&fbdo, "MQ9 Sensor/Valor",sensorvalueMQ9); // Enviando dados para Firebase do MQ9.
 
+  //função pegar valo de fumaça glp e Co
+  LCS ();
+
+  Firebase.RTDB.setInt(&fbdo, "MQ2 Sensor/SMOKE",smoke ); // Enviando dados para Firebase do MQ2.
+  Firebase.RTDB.setInt(&fbdo, "MQ2 Sensor/CO",co ); // Enviando dados para Firebase do MQ2.
+  Firebase.RTDB.setInt(&fbdo, "MQ2 Sensor/LPG",lpg ); // Enviando dados para Firebase do MQ2.
   Serial.println(sensorvalueMQ2); //Imprime valor no monitor serial
 }
 
@@ -184,28 +181,31 @@ void sirene(int n1, int n2, int n3, int n4){
 }
 
 //multiplexar portas:
-int ReadPin(const byte &p){
-  int r;
-  digitalWrite(p, HIGH);
-  analogRead(A0);
-  r = analogRead(A0);
-  digitalWrite(p, LOW);
-  return r;
+void LCS(){
+
+  float* values= mq2.read(true); //set it false if you don't want to print the values to the Serial
+  
+  // lpg = values[0];
+  lpg = mq2.readLPG();
+  // co = values[1];
+  co = mq2.readCO();
+  // smoke = values[2];
+  smoke = mq2.readSmoke();
 }
 
 // identificar vasamentos 
 int leak(){
   if(sensorvalueMQ2 > 550){
-    vasamento = sensorvalueMQ2;
+    vazamento = sensorvalueMQ2;
   }
   else if(sensorvalueMQ8 > 550){
-    vasamento = sensorvalueMQ8;
+    vazamento = sensorvalueMQ8;
   }
   else if(sensorvalueMQ2 > 550){
-    vasamento = sensorvalueMQ8;
+    vazamento = sensorvalueMQ8;
   }
   else{
-    vasamento = 0;
+    vazamento = 0;
   }
-  return vasamento;
+  return vazamento;
 }
