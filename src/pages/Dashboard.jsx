@@ -12,7 +12,7 @@ import { TbAlertTriangle } from 'react-icons/tb';
 
 import { leakLPGData, sensorsData, sensorsOptions } from './../utils/chartsData';
 import { updateGasChart, updateChartSensorsValue } from './../utils/chartsFunctions';
-
+import { VscCircleLargeFilled } from 'react-icons/vsc'
 
 import './pages.scss';
 
@@ -47,33 +47,33 @@ function Dashboard() {
               <h2 className="section__header__title">Monitoramento dos gases do sensor MQ-2</h2>
             </header>
 
-            <PolarAreaChart 
+            {/* <PolarAreaChart 
               initialData={sensorsData}
               options={sensorsOptions}
               callbackUpdate={updateChartSensorsValue}
-            />
+            /> */}
 
             <section className="section__content">
                   <GasMonitor
-                    name='Smoke'
-                    icon={<GiDiceFire className={`icon danger`} />}
+                    name='MQ-2'
+                    icon={<GiGasMask color='red' className={`icon`} />}
                     data={leakLPGData}
                     callbackUpdate={updateGasChart}
-                    path= '/MQ2 Sensor/SMOKE'
+                    path= '/MQ2 Sensor/'
                   />
                   <GasMonitor
-                    name='CO'
-                    icon={<GiGasMask className={`icon danger`} />}
+                    name='MQ-8'
+                    icon={<GiGasMask color='red' className={`icon`} />}
                     data={leakLPGData}
                     callbackUpdate={updateGasChart}
-                    path= '/MQ2 Sensor/CO'
+                    path= '/MQ8 Sensor/'
                   />
                   <GasMonitor
-                    name='LPG'
-                    icon={<GiGasMask className={`icon danger`} />}
+                    name='MQ-9'
+                    icon={<GiGasMask color='red' className={`icon`} />}
                     data={leakLPGData}
                     callbackUpdate={updateGasChart}
-                    path= '/MQ2 Sensor/LPG'
+                    path= '/MQ9 Sensor/'
                   />
             </section>
 

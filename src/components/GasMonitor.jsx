@@ -22,8 +22,9 @@ function GasMonitor({ name, icon,  data, callbackUpdate, path, date}) {
                 <HalfPieChart
                     initialData={data}
                     callbackUpdate={callbackUpdate}
-                    path= {path}
+                    path= {path+"Valor"}
                     dataRef={dataRef}
+                    maxValue={10}
                   />
             </div>
             <footer className="text-muted">Saiba mais</footer>
