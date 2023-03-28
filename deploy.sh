@@ -5,7 +5,7 @@
 
 echo "Fazendo build do projeto"
 
-npm run build
+# npm run build
 
 echo "build feito\n"
 
