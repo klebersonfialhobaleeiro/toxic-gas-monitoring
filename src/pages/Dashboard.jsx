@@ -44,7 +44,7 @@ function Dashboard() {
 
           <section className="section">
             <header className="section__header">
-              <h2 className="section__header__title">Monitoramento dos gases do sensor MQ-2</h2>
+              <h2 className="section__header__title">Monitoramento dos sensores</h2>
             </header>
 
             {/* <PolarAreaChart 

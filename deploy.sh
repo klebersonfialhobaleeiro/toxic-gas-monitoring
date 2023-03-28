@@ -1,13 +1,7 @@
 # !/bin/bash
 
 
-echo "mudando para a branch de produção\n"
 
-git checkout -B gh-pages
-
-echo "Pegando o código da branch main"
-
-git merge main
 
 echo "Fazendo build do projeto"
 
@@ -31,4 +25,3 @@ git push
 
 echo "Voltando para a branch main"
 
-git checkout main
