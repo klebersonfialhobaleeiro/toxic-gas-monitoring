@@ -1,0 +1,43 @@
+@use './../styles/variables';
+
+.icon {
+    max-height: 1.6rem;
+    width: auto;
+}
+
+.statistics{
+    position: relative;
+    padding: variables.$m-01;
+    border-radius: variables.$border-radius-xs ;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    background-color: #fff;
+    .action {
+        position: absolute;
+        top: variables.$s-02;
+        right: variables.$s-02;
+    }
+
+}
+.card {
+    .header {
+        display: flex;
+        gap: variables.$s-02;
+        align-items: center;
+    }
+    .body {
+        display: flex;
+        justify-content: space-between;
+        .insight {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: variables.$s-02;
+            .label {
+                color:  var(--neutral);
+                font-size: 0.85rem;
+                text-transform: capitalize;
+            }
+        }
+    }
+}

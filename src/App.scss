@@ -23,6 +23,29 @@ h1 {
     margin:  1rem 0;
 }
 
+// Estilos gerais do badge
+.badge {
+    display: inline-block;
+    background-color: #159ffc;
+    padding: 0.2rem 0.4rem;
+    border-radius: 7px;
+    font-family: monospace;
+    letter-spacing: 1PX;
+  }
+  
+  // Estilos do texto do badge
+  .badge-text {
+    color: white;
+
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  
+.small {
+    font-size: 0.65rem;
+    color: var(--neutral);
+}
+
 html, body, .main-wrapper {
     transition: background-color 0.2s linear;
 

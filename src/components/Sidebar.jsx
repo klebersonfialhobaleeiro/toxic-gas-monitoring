@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { MdOutlineAutoGraph, MdDashboard, MdReportGmailerrorred } from "react-icons/md";
+import { MdOutlineAutoGraph, MdDashboard, MdHistory } from "react-icons/md";
 import { useState } from 'react';
 import Top from './Top';
 
@@ -10,16 +10,12 @@ function Sidebar({ active }) {
 
     const navItems = [
         {
-            label: 'Dashboard', path : '/dashboard',
+            label: 'Painel', path : '/dashboard',
             icon: <MdDashboard className='sidebar__item__icon' />
         },
         {
-            label: 'Analytics', path : '/analytics',
-            icon: <MdOutlineAutoGraph className='sidebar__item__icon'/>
-        },
-        {
-            label: 'Reports', path : '/reports',
-            icon: <MdReportGmailerrorred className='sidebar__item__icon'/>
+            label: 'Historico', path : '/reports',
+            icon: <MdHistory className='sidebar__item__icon'/>
         }
     ]
     

@@ -1,0 +1,59 @@
+@use './../styles/variables';
+
+
+
+.icon {
+    max-height: 1.6rem;
+    width: auto;
+}
+
+.month_report {
+
+    > h2 {
+        color: var(--neutral);
+        margin: variables.$m-02 0 variables.$s-02 0;
+    }
+
+    width: 100%;
+    max-width: 70rem;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    
+    .header {
+        display: flex;
+        gap: variables.$s-02;
+        align-items: center;
+    }
+    .statistics{
+        position: relative;
+        padding: variables.$m-01;
+        border-radius: variables.$border-radius-xs ;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+        background-color: #fff;
+        
+        .action {
+            position: absolute;
+            top: variables.$m-01;
+            right: variables.$m-01;
+        }
+    }
+    .card {
+        .body {
+            display: flex;
+            justify-content: space-between;
+            .insight {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                padding: variables.$s-02;
+                .label {
+                    color:  var(--neutral);
+                    font-size: 0.85rem;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+}

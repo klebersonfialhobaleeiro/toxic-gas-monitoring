@@ -5,8 +5,7 @@ import useGetDataFirebase from './../hooks/getDataFirebase'
 import './GasMonitor.scss'
 
 function GasMonitor({ name, icon,  data, callbackUpdate, path, date}) {
-    const max = useGetDataFirebase(path+"max") * 3;
-    console.log(max);
+    const max = useGetDataFirebase(path);
     const dataRef = useRef()
 
     return (
@@ -28,9 +27,9 @@ function GasMonitor({ name, icon,  data, callbackUpdate, path, date}) {
                         <HalfPieChart
                             initialData={data}
                             callbackUpdate={callbackUpdate}
-                            path= {path+"Valor"}
+                            path= {path+"valor_atual"}
                             dataRef={dataRef}
-                            maxValue={max}
+                            data={data}
                         />
 
                     }

@@ -6,7 +6,7 @@ import { onValue, ref } from 'firebase/database';
 import './HalfPieChart.scss'
 
 
-function HalfPieChart({initialData, path, size, callbackUpdate , dataRef,  maxValue = 100,options = {}}) {
+function HalfPieChart({initialData, path, size, data, callbackUpdate , dataRef, options = {}}) {
     
     const chartOption = {
         cutout: '70%',
@@ -46,7 +46,7 @@ function HalfPieChart({initialData, path, size, callbackUpdate , dataRef,  maxVa
         if (chartReference.current) {
             const chart = chartReference.current;
             if (callbackUpdate) {
-                callbackUpdate(chart, value, maxValue=maxValue);
+                callbackUpdate(chart, value, data.verde, data.amarelo, data.vermelho);
             }
         }
     }

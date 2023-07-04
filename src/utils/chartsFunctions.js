@@ -2,16 +2,19 @@ const GREEN_COLOR = '#44e657';
 const YELLOW_COLOR = '#e4e418';
 const RED_COLOR = '#ed4f4f';
 
-export function updateGasChart(chart, value, maxValue) {
+export function updateGasChart(chart, value, ...limites) {
     if (!chart) {
         return
     }
+
+    const [verde, amarelo, vermelho] = limites
+
     let color = GREEN_COLOR;
     chart.data.datasets[0].data[0] = Number(value);
-    chart.data.datasets[0].data[1] = maxValue > value ? maxValue - Number(value) : 0;
+    chart.data.datasets[0].data[1] = 1024 > value ? 1024 - Number(value) : 0;
     
-    if (value > (maxValue / 3) ) color = YELLOW_COLOR;
-    if (value >= (maxValue / 3 *2) ) color = RED_COLOR;
+    if (value > verde ) color = YELLOW_COLOR;
+    if (value >= vermelho ) color = RED_COLOR;
   
     chart.data.datasets[0].backgroundColor[0] = color;
     

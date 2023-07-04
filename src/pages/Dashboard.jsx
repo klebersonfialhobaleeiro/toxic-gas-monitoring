@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom'
 import Sidebar from './../components/Sidebar';
 import Navbar from './../components/Navbar';
 import Insight from './../components/Insight';
-import PolarAreaChart from '../components/PolarAreaChart';
 import GasMonitor from '../components/GasMonitor';
 
 import { GiGasMask, GiDiceFire, GiBoneGnawer } from 'react-icons/gi';
@@ -38,9 +37,9 @@ function Dashboard() {
         <main className="content">
           <Navbar />
 
-          <h1>Dashboard</h1>
+          <h1>Painel</h1>
 
-          <Insight insights={insights} />
+          {/* <Insight insights={insights} /> */}
 
           <section className="section">
             <header className="section__header">
@@ -59,21 +58,21 @@ function Dashboard() {
                     icon={<GiGasMask color='red' className={`icon`} />}
                     data={leakLPGData}
                     callbackUpdate={updateGasChart}
-                    path= '/MQ2 Sensor/'
+                    path= '/sensores/mq2/'
                   />
                   <GasMonitor
                     name='MQ-8'
                     icon={<GiGasMask color='red' className={`icon`} />}
                     data={leakLPGData}
                     callbackUpdate={updateGasChart}
-                    path= '/MQ8 Sensor/'
+                    path= '/sensores/mq8/'
                   />
                   <GasMonitor
                     name='MQ-9'
                     icon={<GiGasMask color='red' className={`icon`} />}
                     data={leakLPGData}
                     callbackUpdate={updateGasChart}
-                    path= '/MQ9 Sensor/'
+                    path= '/sensores/mq9/'
                   />
             </section>
 
