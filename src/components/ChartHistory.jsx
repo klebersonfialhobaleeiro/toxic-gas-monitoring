@@ -45,7 +45,7 @@ function ChartComponent({ data }) {
         <div className="statistics">
           <div className="card">
             <div className="header">
-              <img src={heart} alt="" className="icon" />
+              <img src={heart} alt="" className="icon mask-icon" />
               <h3 className="title">Gases</h3>
             </div>
             <Line
@@ -59,6 +59,8 @@ function ChartComponent({ data }) {
                     color: '#009957',
                     backgroundColor: '#009957',
                     borderColor: '#009957',
+                    borderWidth: 2, // Largura da borda em pixels
+                    pointRadius: 0,
                   },
                   {
                     label: 'MQ-8',
@@ -66,13 +68,17 @@ function ChartComponent({ data }) {
                     color: '#159ffc',
                     backgroundColor: '#159ffc',
                     borderColor: '#159ffc',
+                    borderWidth: 2, // Largura da borda em pixels
+                    pointRadius: 0,
                   },
                   {
                     label: 'MQ-9',
                     data: filteredData.map((data) => data.mq9),
-                    color: '#000000',
-                    backgroundColor: '#000000',
-                    borderColor: '#fffff',
+                    color: '#EF5B0C',
+                    backgroundColor: '#EF5B0C',
+                    borderColor: '#EF5B0C',
+                    borderWidth: 2, // Largura da borda em pixels
+                    pointRadius: 0,
                   },
                 ],
               }}
@@ -101,6 +107,7 @@ function ChartComponent({ data }) {
                         return value;
                       },
                     },
+                    grid: {display: false},
                     min: 0,
                     max: 1024, // Ajuste o valor máximo conforme necessário
                   },
@@ -108,6 +115,7 @@ function ChartComponent({ data }) {
                     ticks: {
                       display: false,
                     },
+                    grid: {display: false}
                   },
                 },
                 responsive: true,

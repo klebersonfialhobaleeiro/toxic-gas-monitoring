@@ -53,27 +53,77 @@ function Dashboard() {
             /> */}
 
             <section className="section__content">
-                  <GasMonitor
-                    name='MQ-2'
-                    icon={<GiGasMask color='red' className={`icon`} />}
-                    data={leakLPGData}
-                    callbackUpdate={updateGasChart}
-                    path= '/sensores/mq2/'
-                  />
-                  <GasMonitor
-                    name='MQ-8'
-                    icon={<GiGasMask color='red' className={`icon`} />}
-                    data={leakLPGData}
-                    callbackUpdate={updateGasChart}
-                    path= '/sensores/mq8/'
-                  />
-                  <GasMonitor
-                    name='MQ-9'
-                    icon={<GiGasMask color='red' className={`icon`} />}
-                    data={leakLPGData}
-                    callbackUpdate={updateGasChart}
-                    path= '/sensores/mq9/'
-                  />
+
+<GasMonitor
+  name='MQ-2'
+  icon={<GiGasMask color='red' className={`icon`} />}
+  data={leakLPGData}
+  callbackUpdate={updateGasChart}
+  path='/sensores/mq2/'
+  badges={[
+    {
+      href: "https://www.google.com/search?q=metano+GAS",
+      title: 'Metano',
+      text: 'CH4'
+    },
+    {
+      href: "https://www.google.com/search?q=C4H10+GAS",
+      title: 'Butano',
+      text: 'C4H10'
+    },
+    {
+      href: "https://www.google.com/search?q=H2+GAS",
+      title: 'Propano',
+      text: 'C3H8'
+    },
+    {
+      href: "https://www.google.com/search?q=H2+GAS",
+      title: 'Hidrogênio',
+      text: 'H2'
+    },
+    {
+      href: "https://www.google.com/search?q=fumaca+GAS",
+      title: 'Fumaça',
+      text: 'Fumaça'
+    }
+  ]}
+/>
+
+<GasMonitor
+  name='MQ-8'
+  icon={<GiGasMask color='red' className={`icon`} />}
+  data={leakLPGData}
+  callbackUpdate={updateGasChart}
+  path='/sensores/mq8/'
+  badges={[
+    {
+      href: "https://www.google.com/search?q=H2+GAS",
+      title: 'Hidrogênio',
+      text: 'H2'
+    }
+  ]}
+/>
+
+<GasMonitor
+  name='MQ-9'
+  icon={<GiGasMask color='red' className={`icon`} />}
+  data={leakLPGData}
+  callbackUpdate={updateGasChart}
+  path='/sensores/mq9/'
+  badges={[
+    {
+      href: "https://pt.wikipedia.org/wiki/Mon%C3%B3xido_de_carbono",
+      title: 'Monóxido de carbono',
+      text: 'CO'
+    },
+    {
+      href: "https://www.google.com/search?q=GLP+GAS",
+      title: 'Gás de cozinha',
+      text: 'GLP'
+    }
+  ]}
+/>
+
             </section>
 
               

@@ -22,7 +22,7 @@ function MonthReport({data}) {
                 { isExpanded ? <MdExpandLess className='action' size={20}/> : <MdExpandMore className='action' size={20}/>}
                 <div className="card">
                     <div className="header">
-                        <img src={heart} alt="" className="icon" />
+                        <img src={heart} alt="" className="icon mask-icon" />
                         <h3 className="title">MQ-2</h3>
                         <a href="https://www.google.com/search?q=metano+GAS" title='Metano' className="badge" target="_blank" rel="noopener noreferrer">
                             <span className="badge-text">CH4</span>
@@ -59,7 +59,7 @@ function MonthReport({data}) {
 
                 <div className="card">
                     <div className="header">
-                        <img src={heart} alt="" className="icon" />
+                        <img src={heart} alt="" className="icon mask-icon" />
                         <h3 className="title">MQ-8</h3>
                         <a href="https://www.google.com/search?q=H2+GAS" title='Hidrogênio' className="badge" target="_blank" rel="noopener noreferrer">
                             <span className="badge-text">H2</span>
@@ -83,7 +83,7 @@ function MonthReport({data}) {
 
                 <div className="card">
                     <div className="header">
-                        <img src={heart} alt="" className="icon" />
+                        <img src={heart} alt="" className="icon mask-icon" />
                         <h3 className="title">MQ-9</h3>
                         <a href="https://pt.wikipedia.org/wiki/Mon%C3%B3xido_de_carbono" title='Monóxido de carbono' className="badge" target="_blank" rel="noopener noreferrer">
                             <span className="badge-text">CO</span>

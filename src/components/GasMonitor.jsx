@@ -3,16 +3,32 @@ import HalfPieChart from '../components/HalfPieChart';
 import { TfiDashboard } from 'react-icons/tfi'
 import useGetDataFirebase from './../hooks/getDataFirebase'
 import './GasMonitor.scss'
+import Badge from './Badge';
+import gasmask from '../assets/gas-mask.svg';
 
-function GasMonitor({ name, icon,  data, callbackUpdate, path, date}) {
+
+function GasMonitor({ name, icon,  data, callbackUpdate, path, badges ,date}) {
     const max = useGetDataFirebase(path);
     const dataRef = useRef()
 
     return (
             <div className="GasMonitor">
                 <div className="GasMonitor__header">
-                    {icon}
-                    <h3 className="GasMonitor__header__title"> {name} </h3>
+                    <img src={gasmask} alt="" className="icon mask-icon" />
+
+                    <h3 className="GasMonitor__header__title"> {name} </h3> 
+                        <div className="badges">
+                            {badges.map((badge, index) => (
+                                <Badge
+                                key={index}
+                                href={badge.href}
+                                title={badge.title}
+                                className={badge.className}
+                                >
+                                {badge.text}
+                                </Badge>
+                            ))}
+                        </div>
                 </div>
                 <div className="GasMonitor__content">
                     <span className="GasMonitor__content__data" > 

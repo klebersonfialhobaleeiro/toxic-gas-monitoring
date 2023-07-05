@@ -9,6 +9,9 @@
     width: 5px;
 }
 
+.mask-svg {
+    fill: blue;
+}
 
 .content {
     flex-grow: 1;
@@ -26,7 +29,7 @@ h1 {
 // Estilos gerais do badge
 .badge {
     display: inline-block;
-    background-color: #159ffc;
+    background-color: #4c8db8;
     padding: 0.2rem 0.4rem;
     border-radius: 7px;
     font-family: monospace;

@@ -10,7 +10,7 @@
     padding: variables.$m-01;
     border-radius: variables.$border-radius-xs ;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-    background-color: #fff;
+    background-color: var(--c-background);
     .action {
         position: absolute;
         top: variables.$s-02;

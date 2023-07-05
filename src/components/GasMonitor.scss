@@ -9,7 +9,7 @@
     border-radius: variables.$border-radius-s;
     display: grid;
     grid-template-areas:
-    "header graph"
+    "header header"
     "content graph"
     "content  graph"
     ;
@@ -34,9 +34,15 @@
         width: 100%;
         display: flex;
         align-items: center;
+        gap: variables.$s-02 ;
+        flex-wrap: wrap;
+        .badges {
+            display: flex;
+            gap: variables.$s-02;
+        }
         .icon {
-            width: 1em;
-            height: 1em;
+            width: 2em;
+            height: 2em;
             font-size: 1rem;
             margin-right: variables.$s-02;
             border-radius: 50%;
