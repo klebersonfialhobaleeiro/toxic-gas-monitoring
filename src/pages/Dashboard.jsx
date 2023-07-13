@@ -14,6 +14,7 @@ import { updateGasChart, updateChartSensorsValue } from './../utils/chartsFuncti
 import { VscCircleLargeFilled } from 'react-icons/vsc'
 
 import './pages.scss';
+import Switch from '../components/Switch';
 
 
 function Dashboard() {
@@ -36,7 +37,7 @@ function Dashboard() {
         <Sidebar active={ useLocation().pathname }/>
         <main className="content">
           <Navbar />
-
+          <Switch />
           <h1>Painel</h1>
 
           {/* <Insight insights={insights} /> */}
