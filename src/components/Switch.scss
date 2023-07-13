@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+
+#led-form {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    
+    #led_list {
+        width: 100%;
+        max-width: 20em;
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(5em, 1fr));
+        gap: 1em;
+
+        .field {
+            position: relative;
+            height: 15em;
+            background-color: #ffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 1.4em;
+            border-radius: 5px;
+            
+            @media only screen and (max-width: 800px) {
+                height: 11em;
+            }
+            
+
+            box-shadow: rgba(0, 0, 0, 0.07) 0px 0px 0px 1px;
+
+            .wrapper {
+                position: relative;
+                width: 100%;
+                height: 10em;
+                max-width: 8em;
+            }
+
+            input[name='led__state'] {
+                position: absolute;
+                left: 0;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                
+                background-color: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+
+
+                &:checked + .field__image {
+
+                    &::after {
+                        content: "ON";
+                    }
+                    .led__icon {
+                        transition: filter 0.5s ease-in-out;
+                        filter: none;
+                    }
+
+                    $blur : 8mm;
+                    $offsetY : -1mm;
+                    $offsetX : 0;
+                    
+                    
+                    &[data-led='orange'] .led__icon{
+                        filter: drop-shadow($offsetX $offsetY $blur rgb(255, 38, 38)) 
+                                drop-shadow($offsetX $offsetY calc($blur - 2mm) rgb(255, 255, 0));
+                        
+                    }
+                }
+            }
+
+            .led__name {
+                font-family: 'Gugi', cursive;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            
+                @media (prefers-color-scheme: light) {
+                    --tone : 100;
+                    &[for="green_led"] {
+                        color: rgb(0, var(--tone), 0);
+                    }
+                    &[for="yellow_led"] {
+                        color: rgb(var(--tone), var(--tone), 0);
+                    }
+                    &[for="red_led"] {
+                        color: rgb(var(--tone), 0, 0);
+                    }
+                    &[for="blue_led"] {
+                        color: rgb(0, 0, var(--tone));
+                    }
+                }
+
+            }
+            
+            .field__image {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+                background-color: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .led__icon {
+                    height: 100%;
+                    width: 100%;
+                    max-width: 4em;
+                    max-height: 8em;
+                    object-fit: contain;
+                    transition: filter 0.5s ease-in-out;
+                    filter: grayscale(80%);
+                }
+                
+                &::after {
+                    position: absolute;
+                    display: flex;
+                    text-align: center;
+                    justify-content: center;
+                    content: 'OFF';
+                    width: 100%;
+                    font-family: 'Gugi', cursive;
+                    font-size: 0.7em;
+                    left: 0;
+                    top: -0.6em;
+                }
+            }
+        }
+    }
+}

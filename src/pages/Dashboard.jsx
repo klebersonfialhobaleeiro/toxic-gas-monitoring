@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom'
 import Sidebar from './../components/Sidebar';
 import Navbar from './../components/Navbar';
 import Insight from './../components/Insight';
-import PolarAreaChart from '../components/PolarAreaChart';
 import GasMonitor from '../components/GasMonitor';
 
 import { GiGasMask, GiDiceFire, GiBoneGnawer } from 'react-icons/gi';
@@ -12,9 +11,10 @@ import { TbAlertTriangle } from 'react-icons/tb';
 
 import { leakLPGData, sensorsData, sensorsOptions } from './../utils/chartsData';
 import { updateGasChart, updateChartSensorsValue } from './../utils/chartsFunctions';
-
+import { VscCircleLargeFilled } from 'react-icons/vsc'
 
 import './pages.scss';
+import Switch from '../components/Switch';
 
 
 function Dashboard() {
@@ -37,44 +37,94 @@ function Dashboard() {
         <Sidebar active={ useLocation().pathname }/>
         <main className="content">
           <Navbar />
+          <Switch />
+          <h1>Painel</h1>
 
-          <h1>Dashboard</h1>
-
-          <Insight insights={insights} />
+          {/* <Insight insights={insights} /> */}
 
           <section className="section">
             <header className="section__header">
-              <h2 className="section__header__title">Monitoramento dos gases do sensor MQ-2</h2>
+              <h2 className="section__header__title">Monitoramento dos sensores</h2>
             </header>
 
-            <PolarAreaChart 
+            {/* <PolarAreaChart 
               initialData={sensorsData}
               options={sensorsOptions}
               callbackUpdate={updateChartSensorsValue}
-            />
+            /> */}
 
             <section className="section__content">
-                  <GasMonitor
-                    name='Smoke'
-                    icon={<GiDiceFire className={`icon danger`} />}
-                    data={leakLPGData}
-                    callbackUpdate={updateGasChart}
-                    path= '/MQ2 Sensor/SMOKE'
-                  />
-                  <GasMonitor
-                    name='CO'
-                    icon={<GiGasMask className={`icon danger`} />}
-                    data={leakLPGData}
-                    callbackUpdate={updateGasChart}
-                    path= '/MQ2 Sensor/CO'
-                  />
-                  <GasMonitor
-                    name='LPG'
-                    icon={<GiGasMask className={`icon danger`} />}
-                    data={leakLPGData}
-                    callbackUpdate={updateGasChart}
-                    path= '/MQ2 Sensor/LPG'
-                  />
+
+<GasMonitor
+  name='MQ-2'
+  icon={<GiGasMask color='red' className={`icon`} />}
+  data={leakLPGData}
+  callbackUpdate={updateGasChart}
+  path='/sensores/mq2/'
+  badges={[
+    {
+      href: "https://www.google.com/search?q=metano+GAS",
+      title: 'Metano',
+      text: 'CH4'
+    },
+    {
+      href: "https://www.google.com/search?q=C4H10+GAS",
+      title: 'Butano',
+      text: 'C4H10'
+    },
+    {
+      href: "https://www.google.com/search?q=H2+GAS",
+      title: 'Propano',
+      text: 'C3H8'
+    },
+    {
+      href: "https://www.google.com/search?q=H2+GAS",
+      title: 'Hidrogênio',
+      text: 'H2'
+    },
+    {
+      href: "https://www.google.com/search?q=fumaca+GAS",
+      title: 'Fumaça',
+      text: 'Fumaça'
+    }
+  ]}
+/>
+
+<GasMonitor
+  name='MQ-8'
+  icon={<GiGasMask color='red' className={`icon`} />}
+  data={leakLPGData}
+  callbackUpdate={updateGasChart}
+  path='/sensores/mq8/'
+  badges={[
+    {
+      href: "https://www.google.com/search?q=H2+GAS",
+      title: 'Hidrogênio',
+      text: 'H2'
+    }
+  ]}
+/>
+
+<GasMonitor
+  name='MQ-9'
+  icon={<GiGasMask color='red' className={`icon`} />}
+  data={leakLPGData}
+  callbackUpdate={updateGasChart}
+  path='/sensores/mq9/'
+  badges={[
+    {
+      href: "https://pt.wikipedia.org/wiki/Mon%C3%B3xido_de_carbono",
+      title: 'Monóxido de carbono',
+      text: 'CO'
+    },
+    {
+      href: "https://www.google.com/search?q=GLP+GAS",
+      title: 'Gás de cozinha',
+      text: 'GLP'
+    }
+  ]}
+/>
+
             </section>
 
               

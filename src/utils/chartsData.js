@@ -26,7 +26,7 @@ export const sensorsOptions = {
         },
         title: {
           display: true,
-          text: 'Gas monitoring'
+          text: 'Monitoramento de gases tóxicos'
         }
       },
       elements: {

@@ -1,0 +1,33 @@
+@use './../styles/variables';
+
+.icon {
+    max-height: 1.6rem;
+    width: auto;
+}
+
+
+.record {
+    width: 99%;
+    margin: 0 auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: variables.$s-04;
+    gap: variables.$s-02;
+    background-color: rgba(217, 127, 38, 0.068);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+    .title {
+        color: var(--neutral);
+        font-size: 0.9rem;
+    }
+    .body {
+        display: flex;
+        justify-content: space-between;
+        .insight {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

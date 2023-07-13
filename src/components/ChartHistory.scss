@@ -1,0 +1,36 @@
+@use './../styles/variables';
+
+h2.title {
+    color: var(--neutral);
+    margin: variables.$m-04 0 variables.$s-04 0;
+}
+
+.date-picker {
+    border: 1px inset gray;
+    padding: variables.$s-02;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    background-color: var(--c-background);
+}
+
+.historicos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+
+    .header {
+        display: flex;
+        gap: variables.$s-02;
+        align-items: center;
+    }
+
+    
+
+    .historyChart {
+
+        max-height: 30rem;
+    }
+    @media (max-width: 700px) {
+        grid-template-columns: 1fr;
+}
+}

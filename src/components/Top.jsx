@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from './../assets/react.svg'
+import logo from './../assets/logo.svg'
 import { MdClose } from "react-icons/md";
 
 import './Top.scss'
