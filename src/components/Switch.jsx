@@ -14,7 +14,7 @@ function Switch() {
 
       if (valorAtual.current) {
         console.log(value);
-        valorAtual.current.checked = value;
+        valorAtual.current.checked = value === 0 ? 1 : 0;
       }
     });
   }, []);
