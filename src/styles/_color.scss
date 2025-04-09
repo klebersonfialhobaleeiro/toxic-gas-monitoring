@@ -63,6 +63,10 @@
     ::-webkit-calendar-picker-indicator {
         filter: invert(1);
     }
+
+    .mask-icon {
+        filter: invert(100%);
+    }
 }
 
 [data-theme="light_mode"] {
